@@ -29,9 +29,9 @@ read.lumerical <- function(filename) {
       c1 <- regexpr(file[dimension_locations], pattern = "[0-999]")
       c2 <- regexpr(file[dimension_locations], pattern = ",")
 
-      nv <-
-        as.numeric(substr(file[dimension_locations[1]], c1[1], c2[1] - 1))
       nu <-
+        as.numeric(substr(file[dimension_locations[1]], c1[1], c2[1] - 1))
+      nv <-
         as.numeric(substr(file[dimension_locations[2]], c1[2], c2[2] - 1))
 
       u <-
@@ -53,12 +53,13 @@ read.lumerical <- function(filename) {
           substr(file[dimension_locations[2]], 0, c1[2] - 2),
           file[dimension_locations[3]])
 
-      out_df <- data.frame(u = u, v = v)
-      names(out_df) <- name_vector[1:2]
+      #out_df <- data.frame(u = u, v = v)
+      #names(out_df) <- name_vector[1:2]
 
-      out <- list(coordinates = out_df,
-                  matrix = w_m,
-                  title = name_vector[3])
+      out <- list(coordinates_u = u,
+                  coordinates_v = v,
+                  matrix = w_m)
+                  #title = name_vector[3])
 
       return(out)
     } else{
